@@ -3,9 +3,7 @@ package io.github.ichikura10.block;
 import io.github.ichikura10.block.entity.BlockEntityArmorUpgrader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -42,7 +40,10 @@ public class BlockArmorUpgrader extends BaseEntityBlock {
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        BlockEntity te = pLevel.getBlockEntity(pPos);
+        BlockEntityArmorUpgrader entity = (BlockEntityArmorUpgrader) te;
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+        Containers.dropContents(pLevel, pPos, entity);
     }
 
     @Override
