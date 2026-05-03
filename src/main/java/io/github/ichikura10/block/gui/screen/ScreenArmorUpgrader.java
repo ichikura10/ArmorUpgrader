@@ -29,4 +29,10 @@ public class ScreenArmorUpgrader extends AbstractContainerScreen<MenuArmorUpgrad
         pGuiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
         pGuiGraphics.drawString(this.font, INVENTORY_TITLE, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
+
+    @Override
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        this.renderTooltip(pGuiGraphics,pMouseX,pMouseY);
+    }
 }
