@@ -1,6 +1,7 @@
-package io.github.ichikura10.block;
+package io.github.ichikura10.regi;
 
 import io.github.ichikura10.ArmorUpgrader;
+import io.github.ichikura10.block.BlockArmorUpgrader;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

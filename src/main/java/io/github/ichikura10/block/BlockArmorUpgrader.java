@@ -1,12 +1,19 @@
 package io.github.ichikura10.block;
 
+import io.github.ichikura10.block.entity.BlockEntityArmorUpgrader;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BlockArmorUpgrader extends BaseEntityBlock {
     public BlockArmorUpgrader() {
@@ -14,8 +21,33 @@ public class BlockArmorUpgrader extends BaseEntityBlock {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+        BlockEntityArmorUpgrader armorUpgrader = (BlockEntityArmorUpgrader) blockEntity;
+
+        if (pPlayer.isSteppingCarefully()) {
+            if (!pLevel.isClientSide) {
+                pPlayer.displayClientMessage(Component.literal("Count:" + armorUpgrader.getCount()), true);
+            }
+        } else {
+            armorUpgrader.increment();
+            if (!pLevel.isClientSide) {
+                MenuProvider provider = this.getMenuProvider(pState, pLevel, pPos);
+                pPlayer.openMenu(provider);
+            }
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new BlockEntityArmorUpgrader(blockPos, blockState);
     }
 
     @Override

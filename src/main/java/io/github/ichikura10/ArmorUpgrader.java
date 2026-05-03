@@ -1,7 +1,9 @@
 package io.github.ichikura10;
 
 import com.mojang.logging.LogUtils;
-import io.github.ichikura10.block.ModBlocks;
+import io.github.ichikura10.regi.ModBlocks;
+import io.github.ichikura10.regi.ModBlockEntityTypes;
+import io.github.ichikura10.regi.ModContainerTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -30,6 +32,8 @@ public class ArmorUpgrader {
 
         ModBlocks.blocks.BLOCKS.register(modEventBus);
         ModBlocks.BlockItems.BLOCK_ITEMS.register(modEventBus);
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ModContainerTypes.MENU_TYPES.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
