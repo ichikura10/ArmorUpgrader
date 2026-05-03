@@ -19,6 +19,21 @@ public class MenuArmorUpgrader extends AbstractContainerMenu {
     public MenuArmorUpgrader(int a, Inventory inventory, Container container) {
         super(ModContainerTypes.ARMOR_UPGRADER.get(), a);
         this.container = container;
+        checkContainerSize(container, 3);
+        container.startOpen(inventory.player);
+
+        this.addSlot(new Slot(container, 0, 53, 35));
+        this.addSlot(new Slot(container, 1, 80, 13));
+        this.addSlot(new Slot(container, 2, 111, 35));
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                this.addSlot(new Slot(inventory, j + 9 + i * 9, 8 + j * 18, 84 + i * 18));
+            }
+        }
+        for (int k = 0; k < 9; k++) {
+            this.addSlot(new Slot(inventory, k, 8 + k * 18, 142));
+        }
     }
 
     @Override
@@ -50,5 +65,11 @@ public class MenuArmorUpgrader extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        this.container.stopOpen(pPlayer);
     }
 }
