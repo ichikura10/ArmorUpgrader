@@ -1,5 +1,7 @@
 package io.github.ichikura10.block.gui.container;
 
+import io.github.ichikura10.block.gui.slot.GearSlot;
+import io.github.ichikura10.block.gui.slot.UpgradeMaterialsSlot;
 import io.github.ichikura10.regi.ModContainerTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -22,8 +24,8 @@ public class MenuArmorUpgrader extends AbstractContainerMenu {
         checkContainerSize(container, 3);
         container.startOpen(inventory.player);
 
-        this.addSlot(new Slot(container, 0, 53, 35));
-        this.addSlot(new Slot(container, 1, 80, 13));
+        this.addSlot(new GearSlot(container, 0, 53, 35));
+        this.addSlot(new UpgradeMaterialsSlot(container, 1, 80, 13));
         this.addSlot(new Slot(container, 2, 111, 35));
 
         for (int i = 0; i < 3; i++) {

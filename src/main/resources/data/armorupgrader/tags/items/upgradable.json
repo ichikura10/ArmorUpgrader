@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:swords",
+    "#minecraft:axes",
+    "#minecraft:pickaxes",
+    "#minecraft:shovels",
+    "#minecraft:hoes",
+    "#forge:armors/helmets",
+    "forge:armors/chestplates",
+    "forge:armors/leggings",
+    "forge:armors/boots"
+  ]
+}
